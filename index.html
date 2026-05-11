@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudyPath AI</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: linear-gradient(to bottom right, #dbeafe, #f0f9ff);
+      min-height: 100vh;
+      padding: 40px;
+      color: #1e293b;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 10px;
+      font-size: 42px;
+      color: #2563eb;
+    }
+
+    .subtitle {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #475569;
+      font-size: 18px;
+    }
+
+    .section {
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    select,
+    textarea {
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      border: 1px solid #cbd5e1;
+      font-size: 16px;
+    }
+
+    button {
+      width: 100%;
+      padding: 16px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-size: 18px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+    }
+
+    .results {
+      margin-top: 35px;
+      display: none;
+    }
+
+    .card {
+      background: #f8fafc;
+      border-left: 6px solid #2563eb;
+      padding: 20px;
+      margin-bottom: 20px;
+      border-radius: 12px;
+    }
+
+    .course-title {
+      font-size: 22px;
+      font-weight: bold;
+      margin-bottom: 8px;
+      color: #1e3a8a;
+    }
+
+    .skills {
+      margin-top: 10px;
+      font-size: 15px;
+      color: #334155;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 40px;
+      color: #64748b;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>StudyPath AI</h1>
+    <p class="subtitle">
+      AI-powered course recommendations for MIS students
+    </p>
+
+    <div class="section">
+      <label for="career">Choose Your Career Goal</label>
+      <select id="career">
+        <option value="">Select a career path</option>
+        <option value="data">Data Analyst</option>
+        <option value="ux">UX Designer</option>
+        <option value="cyber">Cybersecurity Analyst</option>
+        <option value="pm">Project Manager</option>
+        <option value="developer">Software Developer</option>
+      </select>
+    </div>
+
+    <div class="section">
+      <label for="interests">What are your interests?</label>
+      <textarea id="interests" rows="4" placeholder="Example: I like business analytics, creative projects, teamwork, and technology..."></textarea>
+    </div>
+
+    <button onclick="generateRecommendations()">
+      Generate AI Recommendations
+    </button>
+
+    <div class="results" id="results">
+      <h2 style="margin-bottom:20px;">Recommended Courses</h2>
+      <div id="recommendationCards"></div>
+    </div>
+
+    <div class="footer">
+      Built for MIS 435 – AI in Business Prototype
+    </div>
+  </div>
+
+  <script>
+    function generateRecommendations() {
+      const career = document.getElementById("career").value;
+      const results = document.getElementById("results");
+      const cards = document.getElementById("recommendationCards");
+
+      cards.innerHTML = "";
+      results.style.display = "block";
+
+      let recommendations = [];
+
+      if (career === "data") {
+        recommendations = [
+          {
+            course: "MIS 320 – Data Visualization",
+            reason: "This course helps students learn how to turn raw business data into visual dashboards and insights.",
+            skills: "Skills: Tableau, dashboards, analytics, business intelligence"
+          },
+          {
+            course: "MIS 422 – Database Systems",
+            reason: "This course teaches SQL and data management skills important for analyst careers.",
+            skills: "Skills: SQL, databases, reporting, data modeling"
+          }
+        ];
+      }
+
+      else if (career === "ux") {
+        recommendations = [
+          {
+            course: "MIS 314 – User Experience Design",
+            reason: "Students learn how to design interfaces and improve digital user experiences.",
+            skills: "Skills: UX research, wireframing, prototyping, accessibility"
+          },
+          {
+            course: "MKTG 380 – Consumer Behavior",
+            reason: "Understanding user psychology helps designers create better products.",
+            skills: "Skills: user behavior, customer research, design thinking"
+          }
+        ];
+      }
+
+      else if (career === "cyber") {
+        recommendations = [
+          {
+            course: "MIS 425 – Cybersecurity Fundamentals",
+            reason: "This course introduces network security and risk management concepts.",
+            skills: "Skills: cybersecurity, networking, risk analysis"
+          },
+          {
+            course: "CSCI 247 – Computer Systems",
+            reason: "Understanding computer systems helps security professionals detect vulnerabilities.",
+            skills: "Skills: operating systems, systems thinking, troubleshooting"
+          }
+        ];
+      }
+
+      else if (career === "pm") {
+        recommendations = [
+          {
+            course: "MGMT 311 – Organizational Behavior",
+            reason: "Project managers need strong communication and leadership skills.",
+            skills: "Skills: leadership, teamwork, management"
+          },
+          {
+            course: "MIS 435 – AI in Business",
+            reason: "This course helps managers understand how AI impacts decision-making in organizations.",
+            skills: "Skills: AI strategy, analytics, product thinking"
+          }
+        ];
+      }
+
+      else if (career === "developer") {
+        recommendations = [
+          {
+            course: "CSCI 141 – Programming Fundamentals",
+            reason: "Strong programming skills are essential for software development careers.",
+            skills: "Skills: coding, debugging, problem-solving"
+          },
+          {
+            course: "MIS 322 – Systems Analysis and Design",
+            reason: "Developers need to understand how business systems are designed and implemented.",
+            skills: "Skills: systems analysis, software planning, technical communication"
+          }
+        ];
+      }
+
+      else {
+        cards.innerHTML = "<p>Please select a career goal first.</p>";
+        return;
+      }
+
+      recommendations.forEach(item => {
+        const card = document.createElement("div");
+        card.classList.add("card");
+
+        card.innerHTML = `
+          <div class="course-title">${item.course}</div>
+          <p>${item.reason}</p>
+          <div class="skills">${item.skills}</div>
+        `;
+
+        cards.appendChild(card);
+      });
+    }
+  </script>
+
+</body>
+</html>
